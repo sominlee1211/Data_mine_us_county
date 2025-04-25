@@ -1,0 +1,31 @@
+---
+title: "Homework 5: Clustering US Counties Household Counts"
+author: "Somin Lee (sl5260)"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+## 1. Project Summary
+
+The goal of this project is to investigate how social vulnerability in county level relate to temporal trends in the number of married VS unmarried households.  For each county, time series of married and unmarried household counts from 2009 to 2022 are fitted with the lowest degree polynomial where $R^2>0.6$. The slope and acceleration at 2022 are extracted alongside indicator flags for series too noisy to fit. These 10 normalized features per county drive a k‑means clustering (after removing an outlier county, Los Angeles), yielding four clusters whose archetypal trajectories are illustrated. Finally, a random forest classifier is trained on 2020 SVI metrics to predict cluster membership, exposing limited predictive power. The report concludes that factors related to poverty, age distribution, and cost of living (which are SVI characteristics) seem to be correlated with the change in households led by married and unmarried people.
+
+## 2. Non‑Technical Improvement
+
+- **Visualization polish**: Reading the report, it was challenging to navigate the plots and their interpretations as the plots were just posted as a chunk without what each one means. It will be helpful if each plot had titles and captions addressing the insight and the context of each plot.
+- **Report structure and language**:  Introduce a brief background section, segment methods/results/discussion with headers, and proofread the narrative for grammatical consistency and smoother transitions.
+
+## 3. Technical Improvement
+Two enhancements were implemented to strengthen the clustering pipeline. First, I could notice that imputation can be improved. The author originally imputed the missing values as 0. This imputation is often biased as the real value will not likely by 0. Therefore, I imputed missing slope and acceleration values were each feature’s mean rather than zero. This approach preserves the natural central tendency of the data, avoids artificially pulling values toward zero, and yields more balanced cluster. 
+
+Second, I introduced a dimension‑reduction step using principal component analysis, followed by silhouette analysis across candidate cluster counts. By selecting the number of clusters that maximizes silhouette width, and then performing k‑means on the principal components, the project will achieve more objectively chosen clusters without relying on arbitrary parameter choices.
+
+
+## 4. Implementation of Technical Improvement
+
+All edits in cluster.R file.
+
+```{r session-info}
+sessionInfo()
