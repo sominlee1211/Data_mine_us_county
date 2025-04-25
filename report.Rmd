@@ -14,8 +14,7 @@ The goal of this project is to investigate how social vulnerability in county le
 
 ## 2. Non‑Technical Improvement
 
-- **Visualization polish**: Reading the report, it was challenging to navigate the plots and their interpretations as the plots were just posted as a chunk without what each one means. It will be helpful if each plot had titles and captions addressing the insight and the context of each plot.
-- **Report structure and language**:  Introduce a brief background section, segment methods/results/discussion with headers, and proofread the narrative for grammatical consistency and smoother transitions.
+Reading the report, it was challenging to navigate the plots and their interpretations as the plots were just posted as a chunk without what each one means. It will be helpful if each plot had titles and captions addressing the insight and the context of each plot.
 
 ## 3. Technical Improvement
 Two enhancements were implemented to strengthen the clustering pipeline. First, I could notice that imputation can be improved. The author originally imputed the missing values as 0. This imputation is often biased as the real value will not likely by 0. Therefore, I imputed missing slope and acceleration values were each feature’s mean rather than zero. This approach preserves the natural central tendency of the data, avoids artificially pulling values toward zero, and yields more balanced cluster. 
